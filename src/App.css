@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.shell {
+  border: 1px solid #ccc;
+  width: 600px;
+}
+
+.courseName {
+  border: 1px solid #ccc;
+  float: left;
+  padding: 5px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +46,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@media (max-width: 480px) {
+
 }
