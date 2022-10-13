@@ -30,13 +30,46 @@
 
 .shell {
   border: 1px solid #ccc;
+  border-radius: 4px;
   width: 600px;
 }
 
 .courseName {
   border: 1px solid #ccc;
+  border-radius: 4px;
   float: left;
   padding: 5px;
+}
+
+.row {
+  width: 600px;
+  margin:auto;
+  text-align: center;
+  align-content: center;
+}
+
+.date {
+  border: 1px solid #ccc;
+  width: 220px;
+  min-width: 40px;
+  float: left;
+}
+
+.cell {
+  border: 1px solid #ccc;
+  width: 40px;
+  min-width: 40px;
+  float: left;
+}
+
+.newgame {
+  width: 300px;
+  margin: auto;
+  padding: 20px 20px 20px 20px;
+}
+
+.done {
+  text-decoration: line-through;
 }
 
 @keyframes App-logo-spin {
