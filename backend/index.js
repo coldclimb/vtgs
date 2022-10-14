@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import sql from './db.js'
+import { CoursesAPI } from './db.js'
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -8,44 +8,57 @@ import sql from './db.js'
 const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-  type Book {
-    title: String
-    author: String
+  type Course {
+    name: String
+    holes: Int
+    par1: Int
+    par2: Int
+    par3: Int
+    par4: Int
+    par5: Int
+    par6: Int
+    par7: Int
+    par8: Int
+    par9: Int
+    par10: Int
+    par11: Int
+    par12: Int
+    par13: Int
+    par14: Int
+    par15: Int
+    par16: Int
+    par17: Int
+    par18: Int
   }
 
   # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  # clients can execute, along with the return type for each. 
   type Query {
-    books: [Book]
+    getAllCourses: [Course]
+    getCourseByName: Course
   }
 `;
 
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
 // Resolvers define how to fetch the types defined in your schema.
-// This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => books,
-  },
-};
+    getAllCourses: async (_, __, { dataSources }) => {
+      return dataSources.coursesAPI.getAllCourses();
+    },
+    },
+  }
+
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  dataSources: () => {
+    return {
+      coursesAPI: new CoursesAPI()
+    }
+  }
 });
 
 // Passing an ApolloServer instance to the `startStandaloneServer` function:
