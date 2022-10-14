@@ -15,6 +15,5 @@ class CoursesAPI extends SQLDataSource {
 }
 
 export {
-  // sqlcourses,
   CoursesAPI,
 };
