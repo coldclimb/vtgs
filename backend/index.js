@@ -1,6 +1,20 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-import { CoursesAPI } from './db.js'
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { config } from "dotenv";
+import { env } from "process";
+import { CoursesAPI } from "./db.js";
+
+// pull vals from .env
+config();
+
+// setup db connection string.
+const sqlConfig = {
+  client: "pg",
+  connection: env.PG_CONNECTION_STRING,
+};
+
+// instantiate db
+const db = new CoursesAPI(sqlConfig);
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -9,6 +23,7 @@ const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   type Course {
+    id: ID!
     name: String
     holes: Int
     par1: Int
@@ -45,20 +60,15 @@ const resolvers = {
     getAllCourses: async (_, __, { dataSources }) => {
       return dataSources.coursesAPI.getAllCourses();
     },
-    },
-  }
-
+  },
+};
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => {
-    return {
-      coursesAPI: new CoursesAPI()
-    }
-  }
+  dataSources: () => ({ db }),
 });
 
 // Passing an ApolloServer instance to the `startStandaloneServer` function:
