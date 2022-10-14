@@ -11,11 +11,12 @@
   "author": "John Borland",
   "license": "ISC",
   "dependencies": {
-    "@apollo/datasource-rest": "^4.3.2",
     "@apollo/server": "^4.0.0",
-    "apollo-datasource-rest": "^3.7.0",
+    "datasource-sql": "^2.0.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
+    "pg": "^8.8.0",
     "postgres": "^3.3.1"
   },
   "devDependencies": {
