@@ -1,27 +1,39 @@
 import React from 'react';
 import './App.css';
+import { useQuery, gql } from '@apollo/client'
 
 function App() {
-  const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  const ListCourses = gql`
+    query ListCourses {
+      getAllCourses {
+        name
+      }
+    }`
+  function CourseList() {
+    const { loading, error, data } = useQuery(ListCourses);
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(  </p>;
+    return data.getAllCourses.map(({ name }) => (
+      <div key={name} className="courseName">
+        <a href="#">{name}</a>
+      </div>
+    ));
+  }
+
+  
+
+
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="shell">
-          <div className='courseName'>
-            Pawnee
-          </div>
+          <CourseList></CourseList>
           <div className="courseName">
             +
           </div>
           <br />
-          <p>{!data ? "Loading..." : data}</p>
           <div className='row'>
             <div className='date'>2022/01/01</div>
             <div className='cell'>4</div>
@@ -37,7 +49,7 @@ function App() {
           <div className='newgame'>New Game</div>
         </div>
       </header>
-        <p>Todo:
+        <p>Todo:</p>
           <ul>
             <li className='done'>Mock up the layout pages</li>
             <li>Learn how to route and set that up</li>
@@ -45,8 +57,10 @@ function App() {
             <li>Line out the elements to be stored</li>
             <li>Mock up a query of those elements</li>
             <li>Build a schema for queries and mutations, and types for the data</li>
+            <li>Add links to course names</li>
+            <li>Add adding a course</li>
           </ul>
-        </p>
+        
     </div>
   );
 }

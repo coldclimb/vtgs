@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+a, a:hover, a:focus, a:active, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 .shell {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -40,6 +45,7 @@
   float: left;
   padding: 5px;
   font-size: 12px;
+  text-decoration: none;
 }
 
 .row {

@@ -2,7 +2,7 @@ import { SQLDataSource } from "datasource-sql";
 
 class CoursesAPI extends SQLDataSource {
   async getAllCourses() {
-    return await this.knex.select("*").from("courses/courses");
+    return await this.knex.select("*").from("courses");
   }
 
   async getCourseByName(name) {
@@ -12,6 +12,7 @@ class CoursesAPI extends SQLDataSource {
       .where({ name: name })
       .first();
   }
+  
 }
 
 export {

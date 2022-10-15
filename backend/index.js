@@ -57,9 +57,13 @@ const typeDefs = `#graphql
 // Resolvers define how to fetch the types defined in your schema.
 const resolvers = {
   Query: {
-    getAllCourses: async (_, {__}, { dataSources }) => {
-      return dataSources.CoursesAPI.getAllCourses();
+    getAllCourses: async (_, __, { dataSources }) => {
+      return db.getAllCourses();
     },
+
+    getCourseByName: async (_, { name }, { dataSources }) => {
+      return db.getCourseByName(name);
+    }
   },
 };
 
