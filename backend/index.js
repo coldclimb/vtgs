@@ -24,8 +24,8 @@ const typeDefs = `#graphql
 
   type Course {
     id: ID!
-    name: String
-    holes: Int
+    name: String!
+    holes: Int!
     par1: Int
     par2: Int
     par3: Int
@@ -57,8 +57,8 @@ const typeDefs = `#graphql
 // Resolvers define how to fetch the types defined in your schema.
 const resolvers = {
   Query: {
-    getAllCourses: async (_, __, { dataSources }) => {
-      return dataSources.coursesAPI.getAllCourses();
+    getAllCourses: async (_, {__}, { dataSources }) => {
+      return dataSources.CoursesAPI.getAllCourses();
     },
   },
 };
